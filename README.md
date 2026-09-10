@@ -10,6 +10,7 @@
 - Position: AI Agent Engineer
 - Location: Seoul / Hybrid / Full-time
 - Requisition: JR101122
+- Job Posting: https://iyuno.wd3.myworkdayjobs.com/careers/job/seoul/ai-agent-engineer_jr101122
 
 ## 공고 요구사항과 구현 계획
 - LLM 기반 AI Agent 시스템 설계 및 개발
