@@ -73,7 +73,7 @@ def make_fake_streamlit(
     fake_st.button = lambda label, *args, **kwargs: button_clicked if "Agent" in label else False
     fake_st.form = lambda *args, **kwargs: NoOpContext()
     fake_st.form_submit_button = lambda *args, **kwargs: feedback_submitted
-    fake_st.radio = lambda *args, **kwargs: "👍 도움이 됨"
+    fake_st.radio = lambda *args, **kwargs: "도움됨"
     fake_st.warning = lambda *args, **kwargs: None
     fake_st.success = lambda *args, **kwargs: None
     fake_st.error = lambda *args, **kwargs: None
