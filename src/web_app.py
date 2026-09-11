@@ -1,8 +1,11 @@
 import os
+import hashlib
 import streamlit as st
 from html import escape
 
-from app import AgentConfigurationError, AgentRunResult, AgentStep, run_agent
+from app import AgentConfigurationError, AgentRunResult, AgentStep, run_agent, run_rag_agent
+from feedback import FeedbackRecord, save_feedback
+from tools import format_tool_results, select_and_run_tools
 
 
 AGENT_STEPS = ["요청 분석", "초안 생성", "품질 검토"]
@@ -313,6 +316,51 @@ def apply_theme():
             color: var(--iyuno-gray-300);
         }
 
+        .iyuno-feedback {
+            border-top: 1px solid var(--iyuno-gray-800);
+            margin-top: 2.2rem;
+            padding-top: 1.35rem;
+        }
+
+        .iyuno-feedback__title {
+            color: var(--iyuno-gray-300);
+            font-size: 0.78rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 0.65rem;
+        }
+
+        div[data-testid="stRadio"] label,
+        div[data-testid="stRadio"] p {
+            color: var(--iyuno-gray-300);
+        }
+
+        div[data-testid="stRadio"] input {
+            accent-color: var(--iyuno-gray-300);
+        }
+
+        div[data-testid="stForm"] {
+            border: 0;
+            padding: 0;
+        }
+
+        div[data-testid="stFormSubmitButton"] button {
+            background: var(--iyuno-dark-gray);
+            border: 1px solid var(--iyuno-gray-700);
+            color: var(--iyuno-white);
+            border-radius: 0.35rem;
+            box-shadow: none;
+        }
+
+        div[data-testid="stFormSubmitButton"] button:hover,
+        div[data-testid="stFormSubmitButton"] button:focus {
+            background: var(--iyuno-gray-800);
+            border-color: var(--iyuno-gray-500);
+            color: var(--iyuno-white);
+            box-shadow: none;
+            outline: none;
+        }
+
         div[data-testid="stMarkdownContainer"] p,
         div[data-testid="stMarkdownContainer"] li {
             line-height: 1.85;
@@ -423,12 +471,23 @@ def render_workflow_status(current_step=None, completed=False, target=None):
         st.markdown(html, unsafe_allow_html=True)
 
 
-def run_agent_once(user_task, agent_runner=run_agent):
+def run_agent_once(user_task, agent_runner=run_agent, use_tools=False):
     return agent_runner(
         user_task,
         progress_callback=update_progress,
         include_steps=True,
         verbose=False,
+        use_tools=use_tools,
+    )
+
+
+def run_rag_agent_once(user_task, agent_runner=run_rag_agent, use_tools=False):
+    return agent_runner(
+        user_task,
+        progress_callback=update_progress,
+        include_steps=True,
+        verbose=False,
+        use_tools=use_tools,
     )
 
 
@@ -476,23 +535,102 @@ def create_demo_result(user_task):
 
     return AgentRunResult(
         task=user_task,
-        steps=[
+        steps=build_demo_steps(
+            user_task,
             AgentStep("요청 분석", "사용자 요청의 목표와 요구사항을 분석합니다.", analysis),
             AgentStep("초안 생성", "분석 결과를 바탕으로 초안을 작성합니다.", draft),
             AgentStep("품질 검토", "초안을 검토하고 최종 답변으로 개선합니다.", review),
-        ],
+        ),
         final_answer=final_answer,
     )
 
 
-def run_demo_agent(user_task, progress_callback=None):
+def create_demo_rag_result(user_task):
+    analysis = """
+**요청 분석 + 문서 검색**
+
+- 사용자는 IYUNO AI Agent 프로젝트의 workflow와 공개 배포 보호 구조에 대해 알고 싶어합니다.
+- `data/`의 공개 문서를 검색한 결과, Agent workflow, Demo/Live Mode, RAG citation 정책이 관련 근거로 확인되었습니다.
+- 답변은 검색된 문서를 바탕으로 요약하고 source를 함께 표시해야 합니다.
+"""
+
+    draft = """
+**초안**
+
+IYUNO AI Agent는 사용자 요청을 분석하고, 초안을 생성한 뒤, 품질 검토를 거쳐 최종 결과를 반환하는 multi-step Agent입니다.
+
+공개 배포에서는 API 크레딧 보호를 위해 Demo Mode가 사용되며, 로컬 Live Mode에서만 실제 OpenAI API를 사용할 수 있습니다.
+"""
+
+    review = """
+**품질 검토**
+
+- 검색 문서에 포함된 workflow 설명과 Demo/Live Mode 정책을 반영했습니다.
+- 공개 배포에서 API 호출을 막는 보호 구조를 명확하게 설명했습니다.
+- 최종 답변에 source/citation을 포함하도록 정리했습니다.
+"""
+
+    final_answer = """
+IYUNO AI Agent는 하나의 사용자 요청을 여러 단계로 처리하는 multi-step Agent workflow를 보여주는 포트폴리오 프로젝트입니다.
+
+핵심 흐름은 다음과 같습니다.
+
+1. User Request Analysis
+2. Draft Generation
+3. Quality Review
+4. Final Result
+
+또한 Streamlit UI는 Demo Mode와 Live Mode를 구분합니다. 공개 배포에서는 API 크레딧 보호를 위해 Demo Mode만 허용하며, 로컬 Live Mode에서만 실제 OpenAI API를 사용할 수 있습니다.
+
+---
+Sources:
+- iyuno_ai_agent_notes.md#chunk-1
+"""
+
+    return AgentRunResult(
+        task=user_task,
+        steps=build_demo_steps(
+            user_task,
+            AgentStep("요청 분석", "사용자 요청을 분석하고 관련 문서를 검색합니다.", analysis),
+            AgentStep("초안 생성", "검색된 문서 근거를 바탕으로 초안을 작성합니다.", draft),
+            AgentStep("품질 검토", "초안의 정확성, 충실성, 출처 표시를 검토합니다.", review),
+        ),
+        final_answer=final_answer,
+    )
+
+
+def build_demo_steps(user_task, *base_steps, use_tools=False):
+    steps = list(base_steps)
+    if use_tools:
+        tool_context = format_tool_results(select_and_run_tools(user_task))
+        steps.insert(1, AgentStep("Tool Calling", "필요한 local tool을 선택하고 실행합니다.", tool_context))
+    return steps
+
+
+def run_demo_agent(user_task, progress_callback=None, use_tools=False):
     active_progress_callback = progress_callback or update_progress
 
     for step_name in AGENT_STEPS:
         active_progress_callback(step_name, "running")
         active_progress_callback(step_name, "complete")
 
-    return create_demo_result(user_task)
+    result = create_demo_result(user_task)
+    if use_tools:
+        result.steps = build_demo_steps(user_task, *result.steps, use_tools=True)
+    return result
+
+
+def run_demo_rag_agent(user_task, progress_callback=None, use_tools=False):
+    active_progress_callback = progress_callback or update_progress
+
+    for step_name in AGENT_STEPS:
+        active_progress_callback(step_name, "running")
+        active_progress_callback(step_name, "complete")
+
+    result = create_demo_rag_result(user_task)
+    if use_tools:
+        result.steps = build_demo_steps(user_task, *result.steps, use_tools=True)
+    return result
 
 
 def update_progress(step_name, status):
@@ -513,18 +651,82 @@ def update_progress(step_name, status):
         )
 
 
-def render_result(result):
+def create_feedback_signature(result, use_rag, use_tools, rating, comment):
+    payload = "\n".join(
+        [
+            result.task,
+            result.final_answer,
+            str(bool(use_rag)),
+            str(bool(use_tools)),
+            rating,
+            comment.strip(),
+        ]
+    )
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
+def render_feedback_form(result, use_rag=False, use_tools=False):
+    st.markdown(
+        '<div class="iyuno-feedback"><div class="iyuno-feedback__title">Feedback</div></div>',
+        unsafe_allow_html=True,
+    )
+
+    with st.form("agent_feedback_form", clear_on_submit=True):
+        rating_label = st.radio(
+            "이 답변이 도움이 되었나요?",
+            ["👍 도움이 됨", "👎 도움이 안 됨"],
+            horizontal=True,
+        )
+        comment = st.text_area(
+            "짧은 피드백 (선택)",
+            placeholder="개선하면 좋을 점을 짧게 남겨주세요.",
+            height=90,
+        )
+        submitted = st.form_submit_button("피드백 저장")
+
+    if not submitted:
+        return
+
+    rating = "helpful" if rating_label.startswith("👍") else "not_helpful"
+    signature = create_feedback_signature(result, use_rag, use_tools, rating, comment)
+
+    if st.session_state.get("last_feedback_signature") == signature:
+        render_status_box("이미 저장된 피드백입니다.", tone="notice")
+        return
+
+    save_feedback(
+        FeedbackRecord(
+            original_request=result.task,
+            final_answer=result.final_answer,
+            use_rag=use_rag,
+            use_tools=use_tools,
+            rating=rating,
+            comment=comment.strip(),
+        )
+    )
+    st.session_state.last_feedback_signature = signature
+    render_status_box("피드백이 저장되었습니다.", tone="notice")
+
+
+def render_result(result, use_rag=False, use_tools=False):
     final_tab, steps_tab = st.tabs(["최종 결과", "Agent 단계"])
 
     with final_tab:
         st.markdown('<div class="iyuno-result-heading">최종 결과</div>', unsafe_allow_html=True)
         st.markdown(result.final_answer)
+        render_feedback_form(result, use_rag=use_rag, use_tools=use_tools)
 
     with steps_tab:
         for step in result.steps:
             with st.expander(step.name):
                 st.caption(step.description)
                 st.markdown(step.output)
+
+        state = getattr(result, "state", None)
+        if state:
+            with st.expander("State Summary"):
+                st.caption("한 번의 Agent 실행 안에서 단계별로 전달된 context 요약입니다.")
+                st.markdown(state.to_summary_markdown())
 
 
 st.set_page_config(
@@ -561,6 +763,18 @@ user_task = st.text_area(
     height=150,
 )
 
+use_rag = st.checkbox(
+    "RAG 사용 (data 폴더 문서 검색)",
+    value=False,
+    help="data/ 폴더의 .txt/.md 문서를 검색해 근거와 citation을 포함합니다.",
+)
+
+use_tools = st.checkbox(
+    "Tool Calling 사용 (local tools)",
+    value=False,
+    help="계산기, 날짜 차이, 텍스트 통계 같은 local Python tool을 필요할 때 실행합니다.",
+)
+
 if st.button(
     "Agent 실행",
     type="primary",
@@ -576,11 +790,19 @@ if st.button(
             st.session_state.status_placeholder = st.empty()
 
             if demo_mode:
-                result = run_demo_agent(user_task)
+                result = (
+                    run_demo_rag_agent(user_task, use_tools=use_tools)
+                    if use_rag
+                    else run_demo_agent(user_task, use_tools=use_tools)
+                )
             else:
-                result = run_agent_once(user_task)
+                result = (
+                    run_rag_agent_once(user_task, use_tools=use_tools)
+                    if use_rag
+                    else run_agent_once(user_task, use_tools=use_tools)
+                )
 
-            render_result(result)
+            render_result(result, use_rag=use_rag, use_tools=use_tools)
 
         except AgentConfigurationError as e:
             render_status_box(str(e), tone="active")

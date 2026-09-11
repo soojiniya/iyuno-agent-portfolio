@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    name: Test and evaluate
+    runs-on: ubuntu-latest
+
+    env:
+      IYUNO_PUBLIC_DEMO_ONLY: "true"
+      PYTHONDONTWRITEBYTECODE: "1"
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Compile Python files
+        run: python -m compileall src evaluation tests
+
+      - name: Run unit tests
+        run: python -m unittest discover -s tests -v
+
+      - name: Run deterministic evaluation
+        run: python evaluation/evaluate_agent.py
