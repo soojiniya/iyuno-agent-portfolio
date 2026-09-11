@@ -21,6 +21,7 @@ AI Agent Engineer 포트폴리오를 위해 만든 multi-step AI Agent workflow 
 - OpenAI API 기반 LLM 호출
 - 분석 / 초안 생성 / 품질 검토로 분리된 Agent workflow
 - Streamlit 웹 UI
+- API 크레딧을 사용하지 않는 기본 데모 모드
 - 웹 화면에서 현재 실행 중인 Agent 단계 표시
 - 최종 결과와 단계별 중간 결과 확인
 - Markdown 출력 정규화
@@ -80,6 +81,8 @@ Streamlit 실행:
 ```bash
 streamlit run src/web_app.py
 ```
+
+웹 앱은 기본적으로 데모 모드로 실행됩니다. 실제 OpenAI API를 사용하려면 사이드바에서 `데모 모드 (API 사용 안 함)`을 해제하세요.
 
 ## 테스트
 

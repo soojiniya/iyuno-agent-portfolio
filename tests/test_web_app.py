@@ -32,6 +32,9 @@ class NoOpContext:
 
 
 class Placeholder:
+    def markdown(self, *args, **kwargs):
+        pass
+
     def info(self, *args, **kwargs):
         pass
 
@@ -42,12 +45,16 @@ class Placeholder:
         pass
 
 
-def make_fake_streamlit(button_clicked):
+def make_fake_streamlit(button_clicked, demo_mode=True):
     fake_st = types.ModuleType("streamlit")
     fake_st.session_state = SessionState()
+    fake_st.sidebar = SimpleNamespace(
+        checkbox=lambda *args, **kwargs: demo_mode,
+    )
     fake_st.set_page_config = lambda *args, **kwargs: None
     fake_st.title = lambda *args, **kwargs: None
     fake_st.write = lambda *args, **kwargs: None
+    fake_st.info = lambda *args, **kwargs: None
     fake_st.divider = lambda *args, **kwargs: None
     fake_st.text_area = lambda *args, **kwargs: "테스트 작업"
     fake_st.button = lambda *args, **kwargs: button_clicked
@@ -64,14 +71,28 @@ def make_fake_streamlit(button_clicked):
     return fake_st
 
 
-def import_web_app_with_fakes(button_clicked, fake_runner):
+def import_web_app_with_fakes(button_clicked, fake_runner, demo_mode=True):
+    class AgentStep:
+        def __init__(self, name, description, output):
+            self.name = name
+            self.description = description
+            self.output = output
+
+    class AgentRunResult:
+        def __init__(self, task, steps, final_answer):
+            self.task = task
+            self.steps = steps
+            self.final_answer = final_answer
+
     fake_app = types.ModuleType("app")
     fake_app.AgentConfigurationError = RuntimeError
+    fake_app.AgentRunResult = AgentRunResult
+    fake_app.AgentStep = AgentStep
     fake_app.run_agent = fake_runner
 
     original_streamlit = sys.modules.get("streamlit")
     original_app = sys.modules.get("app")
-    sys.modules["streamlit"] = make_fake_streamlit(button_clicked)
+    sys.modules["streamlit"] = make_fake_streamlit(button_clicked, demo_mode=demo_mode)
     sys.modules["app"] = fake_app
 
     try:
@@ -92,7 +113,21 @@ def import_web_app_with_fakes(button_clicked, fake_runner):
 
 
 class WebAppExecutionTest(unittest.TestCase):
-    def test_button_click_calls_agent_runner_once(self):
+    def test_demo_mode_button_click_does_not_call_agent_runner(self):
+        calls = []
+
+        def fake_runner(*args, **kwargs):
+            calls.append((args, kwargs))
+
+        import_web_app_with_fakes(
+            button_clicked=True,
+            fake_runner=fake_runner,
+            demo_mode=True,
+        )
+
+        self.assertEqual(calls, [])
+
+    def test_real_mode_button_click_calls_agent_runner_once(self):
         calls = []
 
         def fake_runner(task, progress_callback=None, include_steps=False, verbose=True):
@@ -107,7 +142,11 @@ class WebAppExecutionTest(unittest.TestCase):
             progress_callback("요청 분석", "complete")
             return SimpleNamespace(final_answer="final", steps=[])
 
-        import_web_app_with_fakes(button_clicked=True, fake_runner=fake_runner)
+        import_web_app_with_fakes(
+            button_clicked=True,
+            fake_runner=fake_runner,
+            demo_mode=False,
+        )
 
         self.assertEqual(len(calls), 1)
         self.assertEqual(calls[0]["task"], "테스트 작업")
@@ -120,7 +159,11 @@ class WebAppExecutionTest(unittest.TestCase):
         def fake_runner(*args, **kwargs):
             calls.append((args, kwargs))
 
-        import_web_app_with_fakes(button_clicked=False, fake_runner=fake_runner)
+        import_web_app_with_fakes(
+            button_clicked=False,
+            fake_runner=fake_runner,
+            demo_mode=False,
+        )
 
         self.assertEqual(calls, [])
 
