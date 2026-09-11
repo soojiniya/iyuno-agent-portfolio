@@ -10,7 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      IYUNO_PUBLIC_DEMO_ONLY: "true"
       PYTHONDONTWRITEBYTECODE: "1"
 
     steps:
