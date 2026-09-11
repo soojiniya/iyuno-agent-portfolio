@@ -1,4 +1,5 @@
 import importlib.util
+import os
 import sys
 import types
 import unittest
@@ -71,7 +72,7 @@ def make_fake_streamlit(button_clicked, demo_mode=True):
     return fake_st
 
 
-def import_web_app_with_fakes(button_clicked, fake_runner, demo_mode=True):
+def import_web_app_with_fakes(button_clicked, fake_runner, demo_mode=True, env=None):
     class AgentStep:
         def __init__(self, name, description, output):
             self.name = name
@@ -92,6 +93,13 @@ def import_web_app_with_fakes(button_clicked, fake_runner, demo_mode=True):
 
     original_streamlit = sys.modules.get("streamlit")
     original_app = sys.modules.get("app")
+    original_env = {}
+    env = env or {}
+
+    for key, value in env.items():
+        original_env[key] = os.environ.get(key)
+        os.environ[key] = value
+
     sys.modules["streamlit"] = make_fake_streamlit(button_clicked, demo_mode=demo_mode)
     sys.modules["app"] = fake_app
 
@@ -110,6 +118,12 @@ def import_web_app_with_fakes(button_clicked, fake_runner, demo_mode=True):
             sys.modules.pop("app", None)
         else:
             sys.modules["app"] = original_app
+
+        for key, original_value in original_env.items():
+            if original_value is None:
+                os.environ.pop(key, None)
+            else:
+                os.environ[key] = original_value
 
 
 class WebAppExecutionTest(unittest.TestCase):
@@ -152,6 +166,36 @@ class WebAppExecutionTest(unittest.TestCase):
         self.assertEqual(calls[0]["task"], "테스트 작업")
         self.assertTrue(calls[0]["include_steps"])
         self.assertFalse(calls[0]["verbose"])
+
+    def test_public_demo_only_mode_never_calls_agent_runner(self):
+        calls = []
+
+        def fake_runner(*args, **kwargs):
+            calls.append((args, kwargs))
+
+        import_web_app_with_fakes(
+            button_clicked=True,
+            fake_runner=fake_runner,
+            demo_mode=False,
+            env={"IYUNO_PUBLIC_DEMO_ONLY": "true"},
+        )
+
+        self.assertEqual(calls, [])
+
+    def test_streamlit_cloud_mode_never_calls_agent_runner(self):
+        calls = []
+
+        def fake_runner(*args, **kwargs):
+            calls.append((args, kwargs))
+
+        import_web_app_with_fakes(
+            button_clicked=True,
+            fake_runner=fake_runner,
+            demo_mode=False,
+            env={"STREAMLIT_SHARING_MODE": "streamlit_app"},
+        )
+
+        self.assertEqual(calls, [])
 
     def test_regular_rerun_without_button_click_does_not_call_agent_runner(self):
         calls = []

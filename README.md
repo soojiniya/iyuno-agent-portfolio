@@ -84,6 +84,14 @@ streamlit run src/web_app.py
 
 웹 앱은 기본적으로 데모 모드로 실행됩니다. 실제 OpenAI API를 사용하려면 사이드바에서 `데모 모드 (API 사용 안 함)`을 해제하세요.
 
+공개 배포 환경에서는 API 크레딧 보호를 위해 Live Mode를 비활성화할 수 있습니다.
+
+```text
+IYUNO_PUBLIC_DEMO_ONLY=true
+```
+
+이 값이 설정되었거나 Streamlit Community Cloud 환경이 감지되면 웹 앱은 데모 모드만 사용하며 실제 OpenAI API를 호출하지 않습니다.
+
 ## 테스트
 
 ```bash
@@ -121,6 +129,7 @@ Streamlit에서만 임시로 문자열을 치환하면 CLI, 테스트, 평가 �
 
 - `.env`는 `.gitignore`에 포함되어 있어 GitHub에 올라가지 않도록 설정되어 있습니다.
 - 실제 API Key는 `.env.example`이 아니라 로컬 `.env`에만 저장해야 합니다.
+- 공개 배포 시에는 `IYUNO_PUBLIC_DEMO_ONLY=true`를 설정해 Live Mode를 비활성화하는 것을 권장합니다.
 - 커밋 전 `git status --ignored`로 `.env`가 ignored 상태인지 확인하는 것을 권장합니다.
 
 ## 향후 개선 방향

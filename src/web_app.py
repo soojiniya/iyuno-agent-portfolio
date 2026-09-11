@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 from html import escape
 
@@ -10,6 +11,9 @@ STEP_LABELS = {
     "초안 생성": ("02", "Draft"),
     "품질 검토": ("03", "Review"),
 }
+
+PUBLIC_DEMO_ONLY_ENV = "IYUNO_PUBLIC_DEMO_ONLY"
+STREAMLIT_SHARING_MODE_ENV = "STREAMLIT_SHARING_MODE"
 
 
 def apply_theme():
@@ -357,6 +361,27 @@ def render_mode_badge(message):
     )
 
 
+def env_flag_enabled(name):
+    return os.getenv(name, "").strip().lower() in {"1", "true", "yes", "on"}
+
+
+def is_public_demo_only():
+    return env_flag_enabled(PUBLIC_DEMO_ONLY_ENV) or bool(os.getenv(STREAMLIT_SHARING_MODE_ENV))
+
+
+def get_demo_mode(public_demo_only):
+    selected_demo_mode = st.sidebar.checkbox(
+        "데모 모드 (API 사용 안 함)",
+        value=True,
+        disabled=public_demo_only,
+        help="공개 배포 환경에서는 API 크레딧 보호를 위해 데모 모드만 사용할 수 있습니다."
+        if public_demo_only
+        else None,
+    )
+
+    return True if public_demo_only else selected_demo_mode
+
+
 def render_workflow_status(current_step=None, completed=False, target=None):
     completed_steps = st.session_state.get("completed_steps", set())
     parts = ['<div class="iyuno-workflow">']
@@ -517,15 +542,16 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-demo_mode = st.sidebar.checkbox(
-    "데모 모드 (API 사용 안 함)",
-    value=True,
-)
+public_demo_only = is_public_demo_only()
+demo_mode = get_demo_mode(public_demo_only)
 
 if demo_mode:
     render_mode_badge("DEMO MODE · API CREDIT 0")
 else:
     render_mode_badge("LIVE MODE · API CREDIT USED")
+
+if public_demo_only:
+    st.caption("Public deployment: Live Mode is disabled to protect API credits.")
 
 st.markdown('</div><div class="iyuno-divider"></div>', unsafe_allow_html=True)
 
