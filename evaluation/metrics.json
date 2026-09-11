@@ -1,0 +1,848 @@
+{
+  "summary": {
+    "total_cases": 32,
+    "passed_cases": 32,
+    "task_success_rate": 1.0,
+    "keyword_accuracy": 1.0,
+    "recall_at_k": 1.0,
+    "citation_rate": 1.0,
+    "average_latency_seconds": 0.000329,
+    "estimated_total_tokens": 7578,
+    "estimated_cost_usd": 0.0007578,
+    "faithfulness_proxy": 0.75
+  },
+  "by_category": {
+    "general_agent": {
+      "cases": 8,
+      "task_success_rate": 1.0,
+      "keyword_accuracy": 1.0,
+      "average_latency_seconds": 2e-06
+    },
+    "mixed_rag_tool": {
+      "cases": 8,
+      "task_success_rate": 1.0,
+      "keyword_accuracy": 1.0,
+      "average_latency_seconds": 0.000608
+    },
+    "rag": {
+      "cases": 8,
+      "task_success_rate": 1.0,
+      "keyword_accuracy": 1.0,
+      "average_latency_seconds": 0.000664
+    },
+    "tool_calling": {
+      "cases": 8,
+      "task_success_rate": 1.0,
+      "keyword_accuracy": 1.0,
+      "average_latency_seconds": 4.4e-05
+    }
+  },
+  "results": [
+    {
+      "id": "agent_customer_delay_email",
+      "category": "general_agent",
+      "passed": true,
+      "keyword_accuracy": 1.0,
+      "retrieval_recall_at_k": null,
+      "citation_present": false,
+      "citation_expected": false,
+      "retrieved_sources": [],
+      "expected_sources": [],
+      "tool_hit_rate": null,
+      "actual_tools": [],
+      "expected_tools": [],
+      "latency_seconds": 3e-06,
+      "estimated_input_tokens": 108,
+      "estimated_output_tokens": 45,
+      "estimated_total_tokens": 153,
+      "estimated_cost_usd": 1.53e-05,
+      "faithfulness_proxy": 0.0,
+      "answer_preview": "Evaluation answer for agent_customer_delay_email.\n\nThe answer should apologize, mention delivery status, and include a next step.\n\nRequired coverage: apology, delivery, next step."
+    },
+    {
+      "id": "agent_refund_policy_reply",
+      "category": "general_agent",
+      "passed": true,
+      "keyword_accuracy": 1.0,
+      "retrieval_recall_at_k": null,
+      "citation_present": false,
+      "citation_expected": false,
+      "retrieved_sources": [],
+      "expected_sources": [],
+      "tool_hit_rate": null,
+      "actual_tools": [],
+      "expected_tools": [],
+      "latency_seconds": 3e-06,
+      "estimated_input_tokens": 103,
+      "estimated_output_tokens": 44,
+      "estimated_total_tokens": 147,
+      "estimated_cost_usd": 1.47e-05,
+      "faithfulness_proxy": 0.0,
+      "answer_preview": "Evaluation answer for agent_refund_policy_reply.\n\nThe answer should explain refund handling in a customer-friendly tone.\n\nRequired coverage: refund, processing time, customer."
+    },
+    {
+      "id": "agent_translate_workflow",
+      "category": "general_agent",
+      "passed": true,
+      "keyword_accuracy": 1.0,
+      "retrieval_recall_at_k": null,
+      "citation_present": false,
+      "citation_expected": false,
+      "retrieved_sources": [],
+      "expected_sources": [],
+      "tool_hit_rate": null,
+      "actual_tools": [],
+      "expected_tools": [],
+      "latency_seconds": 2e-06,
+      "estimated_input_tokens": 92,
+      "estimated_output_tokens": 38,
+      "estimated_total_tokens": 130,
+      "estimated_cost_usd": 1.3e-05,
+      "faithfulness_proxy": 0.0,
+      "answer_preview": "Evaluation answer for agent_translate_workflow.\n\nThe answer should summarize the core multi-step workflow.\n\nRequired coverage: analyze, draft, review."
+    },
+    {
+      "id": "agent_meeting_followup",
+      "category": "general_agent",
+      "passed": true,
+      "keyword_accuracy": 1.0,
+      "retrieval_recall_at_k": null,
+      "citation_present": false,
+      "citation_expected": false,
+      "retrieved_sources": [],
+      "expected_sources": [],
+      "tool_hit_rate": null,
+      "actual_tools": [],
+      "expected_tools": [],
+      "latency_seconds": 1e-06,
+      "estimated_input_tokens": 100,
+      "estimated_output_tokens": 40,
+      "estimated_total_tokens": 140,
+      "estimated_cost_usd": 1.4e-05,
+      "faithfulness_proxy": 0.0,
+      "answer_preview": "Evaluation answer for agent_meeting_followup.\n\nThe answer should include thanks and actionable next steps.\n\nRequired coverage: thank, action items, deadline."
+    },
+    {
+      "id": "agent_product_issue_reply",
+      "category": "general_agent",
+      "passed": true,
+      "keyword_accuracy": 1.0,
+      "retrieval_recall_at_k": null,
+      "citation_present": false,
+      "citation_expected": false,
+      "retrieved_sources": [],
+      "expected_sources": [],
+      "tool_hit_rate": null,
+      "actual_tools": [],
+      "expected_tools": [],
+      "latency_seconds": 1e-06,
+      "estimated_input_tokens": 100,
+      "estimated_output_tokens": 42,
+      "estimated_total_tokens": 142,
+      "estimated_cost_usd": 1.42e-05,
+      "faithfulness_proxy": 0.0,
+      "answer_preview": "Evaluation answer for agent_product_issue_reply.\n\nThe answer should be empathetic and offer a concrete support path.\n\nRequired coverage: apology, replacement, support."
+    },
+    {
+      "id": "agent_job_portfolio_summary",
+      "category": "general_agent",
+      "passed": true,
+      "keyword_accuracy": 1.0,
+      "retrieval_recall_at_k": null,
+      "citation_present": false,
+      "citation_expected": false,
+      "retrieved_sources": [],
+      "expected_sources": [],
+      "tool_hit_rate": null,
+      "actual_tools": [],
+      "expected_tools": [],
+      "latency_seconds": 1e-06,
+      "estimated_input_tokens": 108,
+      "estimated_output_tokens": 42,
+      "estimated_total_tokens": 150,
+      "estimated_cost_usd": 1.5e-05,
+      "faithfulness_proxy": 0.0,
+      "answer_preview": "Evaluation answer for agent_job_portfolio_summary.\n\nThe answer should position the project as an AI agent portfolio.\n\nRequired coverage: AI Agent, workflow, evaluation."
+    },
+    {
+      "id": "agent_quality_checklist",
+      "category": "general_agent",
+      "passed": true,
+      "keyword_accuracy": 1.0,
+      "retrieval_recall_at_k": null,
+      "citation_present": false,
+      "citation_expected": false,
+      "retrieved_sources": [],
+      "expected_sources": [],
+      "tool_hit_rate": null,
+      "actual_tools": [],
+      "expected_tools": [],
+      "latency_seconds": 1e-06,
+      "estimated_input_tokens": 97,
+      "estimated_output_tokens": 37,
+      "estimated_total_tokens": 134,
+      "estimated_cost_usd": 1.34e-05,
+      "faithfulness_proxy": 0.0,
+      "answer_preview": "Evaluation answer for agent_quality_checklist.\n\nThe answer should provide a practical review checklist.\n\nRequired coverage: clarity, tone, accuracy."
+    },
+    {
+      "id": "agent_error_message",
+      "category": "general_agent",
+      "passed": true,
+      "keyword_accuracy": 1.0,
+      "retrieval_recall_at_k": null,
+      "citation_present": false,
+      "citation_expected": false,
+      "retrieved_sources": [],
+      "expected_sources": [],
+      "tool_hit_rate": null,
+      "actual_tools": [],
+      "expected_tools": [],
+      "latency_seconds": 1e-06,
+      "estimated_input_tokens": 95,
+      "estimated_output_tokens": 34,
+      "estimated_total_tokens": 129,
+      "estimated_cost_usd": 1.29e-05,
+      "faithfulness_proxy": 0.0,
+      "answer_preview": "Evaluation answer for agent_error_message.\n\nThe answer should be clear and non-technical.\n\nRequired coverage: try again, error, support."
+    },
+    {
+      "id": "rag_workflow_steps",
+      "category": "rag",
+      "passed": true,
+      "keyword_accuracy": 1.0,
+      "retrieval_recall_at_k": 1.0,
+      "citation_present": true,
+      "citation_expected": true,
+      "retrieved_sources": [
+        "iyuno_ai_agent_notes.md"
+      ],
+      "expected_sources": [
+        "iyuno_ai_agent_notes.md"
+      ],
+      "tool_hit_rate": null,
+      "actual_tools": [],
+      "expected_tools": [],
+      "latency_seconds": 0.001224,
+      "estimated_input_tokens": 133,
+      "estimated_output_tokens": 189,
+      "estimated_total_tokens": 322,
+      "estimated_cost_usd": 3.22e-05,
+      "faithfulness_proxy": 1.0,
+      "answer_preview": "Evaluation answer for rag_workflow_steps.\n\nThe answer should use retrieved local documentation and cite it.\n\nRequired coverage: User Request Analysis, Draft Generation, Quality Review, Final Result.\n\nRetrieved context summary: # AI Agent Workflow Notes This public knowledge note describes the portfolio agent design. The IYUNO AI Agent uses a multi-step workflow: 1. User Request Analysis: identify the user's goal, constraints, and expected output. 2. Draft Generation: create an initial answer using the analyzed request. 3. Quality Review: review the draft for clarity, completeness, and accuracy"
+    },
+    {
+      "id": "rag_demo_mode_policy",
+      "category": "rag",
+      "passed": true,
+      "keyword_accuracy": 1.0,
+      "retrieval_recall_at_k": 1.0,
+      "citation_present": true,
+      "citation_expected": true,
+      "retrieved_sources": [
+        "iyuno_ai_agent_notes.md"
+      ],
+      "expected_sources": [
+        "iyuno_ai_agent_notes.md"
+      ],
+      "tool_hit_rate": null,
+      "actual_tools": [],
+      "expected_tools": [],
+      "latency_seconds": 0.000612,
+      "estimated_input_tokens": 108,
+      "estimated_output_tokens": 180,
+      "estimated_total_tokens": 288,
+      "estimated_cost_usd": 2.88e-05,
+      "faithfulness_proxy": 1.0,
+      "answer_preview": "Evaluation answer for rag_demo_mode_policy.\n\nThe answer should explain that Demo Mode avoids OpenAI API calls.\n\nRequired coverage: Demo Mode, mock, does not call.\n\nRetrieved context summary: # AI Agent Workflow Notes This public knowledge note describes the portfolio agent design. The IYUNO AI Agent uses a multi-step workflow: 1. User Request Analysis: identify the user's goal, constraints, and expected output. 2. Draft Generation: create an initial answer using the analyzed request. 3. Quality Review: review the draft for clarity, completeness, and accuracy. 4. Final Result: return the improv"
+    },
+    {
+      "id": "rag_live_mode_policy",
+      "category": "rag",
+      "passed": true,
+      "keyword_accuracy": 1.0,
+      "retrieval_recall_at_k": 1.0,
+      "citation_present": true,
+      "citation_expected": true,
+      "retrieved_sources": [
+        "iyuno_ai_agent_notes.md"
+      ],
+      "expected_sources": [
+        "iyuno_ai_agent_notes.md"
+      ],
+      "tool_hit_rate": null,
+      "actual_tools": [],
+      "expected_tools": [],
+      "latency_seconds": 0.000561,
+      "estimated_input_tokens": 100,
+      "estimated_output_tokens": 180,
+      "estimated_total_tokens": 280,
+      "estimated_cost_usd": 2.8e-05,
+      "faithfulness_proxy": 1.0,
+      "answer_preview": "Evaluation answer for rag_live_mode_policy.\n\nThe answer should describe local API-key based Live Mode.\n\nRequired coverage: Live Mode, OpenAI API, local API key.\n\nRetrieved context summary: # AI Agent Workflow Notes This public knowledge note describes the portfolio agent design. The IYUNO AI Agent uses a multi-step workflow: 1. User Request Analysis: identify the user's goal, constraints, and expected output. 2. Draft Generation: create an initial answer using the analyzed request. 3. Quality Review: review the draft for clarity, completeness, and accuracy. 4. Final Result: return the improved"
+    },
+    {
+      "id": "rag_public_deployment",
+      "category": "rag",
+      "passed": true,
+      "keyword_accuracy": 1.0,
+      "retrieval_recall_at_k": 1.0,
+      "citation_present": true,
+      "citation_expected": true,
+      "retrieved_sources": [
+        "iyuno_ai_agent_notes.md"
+      ],
+      "expected_sources": [
+        "iyuno_ai_agent_notes.md"
+      ],
+      "tool_hit_rate": null,
+      "actual_tools": [],
+      "expected_tools": [],
+      "latency_seconds": 0.000539,
+      "estimated_input_tokens": 122,
+      "estimated_output_tokens": 190,
+      "estimated_total_tokens": 312,
+      "estimated_cost_usd": 3.12e-05,
+      "faithfulness_proxy": 1.0,
+      "answer_preview": "Evaluation answer for rag_public_deployment.\n\nThe answer should mention public deployment protection and the environment variable.\n\nRequired coverage: public deployment, disabled, IYUNO_PUBLIC_DEMO_ONLY.\n\nRetrieved context summary: # AI Agent Workflow Notes This public knowledge note describes the portfolio agent design. The IYUNO AI Agent uses a multi-step workflow: 1. User Request Analysis: identify the user's goal, constraints, and expected output. 2. Draft Generation: create an initial answer using the analyzed request. 3. Quality Review: review the draft for clarity, completeness, and acc"
+    },
+    {
+      "id": "rag_document_sources",
+      "category": "rag",
+      "passed": true,
+      "keyword_accuracy": 1.0,
+      "retrieval_recall_at_k": 1.0,
+      "citation_present": true,
+      "citation_expected": true,
+      "retrieved_sources": [
+        "iyuno_ai_agent_notes.md"
+      ],
+      "expected_sources": [
+        "iyuno_ai_agent_notes.md"
+      ],
+      "tool_hit_rate": null,
+      "actual_tools": [],
+      "expected_tools": [],
+      "latency_seconds": 0.000572,
+      "estimated_input_tokens": 102,
+      "estimated_output_tokens": 177,
+      "estimated_total_tokens": 279,
+      "estimated_cost_usd": 2.79e-05,
+      "faithfulness_proxy": 1.0,
+      "answer_preview": "Evaluation answer for rag_document_sources.\n\nThe answer should identify .txt and .md files in data/ as sources.\n\nRequired coverage: .txt, .md, data.\n\nRetrieved context summary: force this with the `IYUNO_PUBLIC_DEMO_ONLY=true` environment variable. RAG support uses public `.txt` or `.md` files in the `data/` directory as local knowledge sources. The documents are split into chunks, embedded, retrieved with vector similarity search, and cited in the final answer. # AI Agent Workflow Notes This public knowledge note describes the portfolio agent design. The IYUNO AI Agent uses a multi-step workf"
+    },
+    {
+      "id": "rag_citation_requirement",
+      "category": "rag",
+      "passed": true,
+      "keyword_accuracy": 1.0,
+      "retrieval_recall_at_k": 1.0,
+      "citation_present": true,
+      "citation_expected": true,
+      "retrieved_sources": [
+        "iyuno_ai_agent_notes.md"
+      ],
+      "expected_sources": [
+        "iyuno_ai_agent_notes.md"
+      ],
+      "tool_hit_rate": null,
+      "actual_tools": [],
+      "expected_tools": [],
+      "latency_seconds": 0.000537,
+      "estimated_input_tokens": 98,
+      "estimated_output_tokens": 178,
+      "estimated_total_tokens": 276,
+      "estimated_cost_usd": 2.76e-05,
+      "faithfulness_proxy": 1.0,
+      "answer_preview": "Evaluation answer for rag_citation_requirement.\n\nThe answer should mention citations in the final answer.\n\nRequired coverage: cited, final answer, source.\n\nRetrieved context summary: force this with the `IYUNO_PUBLIC_DEMO_ONLY=true` environment variable. RAG support uses public `.txt` or `.md` files in the `data/` directory as local knowledge sources. The documents are split into chunks, embedded, retrieved with vector similarity search, and cited in the final answer. # AI Agent Workflow Notes This public knowledge note describes the portfolio agent design. The IYUNO AI Agent uses a multi-step"
+    },
+    {
+      "id": "rag_embedding_retrieval",
+      "category": "rag",
+      "passed": true,
+      "keyword_accuracy": 1.0,
+      "retrieval_recall_at_k": 1.0,
+      "citation_present": true,
+      "citation_expected": true,
+      "retrieved_sources": [
+        "iyuno_ai_agent_notes.md"
+      ],
+      "expected_sources": [
+        "iyuno_ai_agent_notes.md"
+      ],
+      "tool_hit_rate": null,
+      "actual_tools": [],
+      "expected_tools": [],
+      "latency_seconds": 0.000698,
+      "estimated_input_tokens": 117,
+      "estimated_output_tokens": 185,
+      "estimated_total_tokens": 302,
+      "estimated_cost_usd": 3.02e-05,
+      "faithfulness_proxy": 1.0,
+      "answer_preview": "Evaluation answer for rag_embedding_retrieval.\n\nThe answer should summarize chunking, embeddings, and vector search.\n\nRequired coverage: chunks, embedded, vector similarity search.\n\nRetrieved context summary: force this with the `IYUNO_PUBLIC_DEMO_ONLY=true` environment variable. RAG support uses public `.txt` or `.md` files in the `data/` directory as local knowledge sources. The documents are split into chunks, embedded, retrieved with vector similarity search, and cited in the final answer. # AI Agent Workflow Notes This public knowledge note describes the portfolio agent design. The IYUNO "
+    },
+    {
+      "id": "rag_streamlit_interface",
+      "category": "rag",
+      "passed": true,
+      "keyword_accuracy": 1.0,
+      "retrieval_recall_at_k": 1.0,
+      "citation_present": true,
+      "citation_expected": true,
+      "retrieved_sources": [
+        "iyuno_ai_agent_notes.md"
+      ],
+      "expected_sources": [
+        "iyuno_ai_agent_notes.md"
+      ],
+      "tool_hit_rate": null,
+      "actual_tools": [],
+      "expected_tools": [],
+      "latency_seconds": 0.000565,
+      "estimated_input_tokens": 103,
+      "estimated_output_tokens": 179,
+      "estimated_total_tokens": 282,
+      "estimated_cost_usd": 2.82e-05,
+      "faithfulness_proxy": 1.0,
+      "answer_preview": "Evaluation answer for rag_streamlit_interface.\n\nThe answer should mention the Streamlit web interface.\n\nRequired coverage: Streamlit, web interface, Demo Mode.\n\nRetrieved context summary: # AI Agent Workflow Notes This public knowledge note describes the portfolio agent design. The IYUNO AI Agent uses a multi-step workflow: 1. User Request Analysis: identify the user's goal, constraints, and expected output. 2. Draft Generation: create an initial answer using the analyzed request. 3. Quality Review: review the draft for clarity, completeness, and accuracy. 4. Final Result: return the improved "
+    },
+    {
+      "id": "tool_calculator_addition",
+      "category": "tool_calling",
+      "passed": true,
+      "keyword_accuracy": 1.0,
+      "retrieval_recall_at_k": null,
+      "citation_present": false,
+      "citation_expected": false,
+      "retrieved_sources": [],
+      "expected_sources": [],
+      "tool_hit_rate": 1.0,
+      "actual_tools": [
+        "calculator"
+      ],
+      "expected_tools": [
+        "calculator"
+      ],
+      "latency_seconds": 0.00019,
+      "estimated_input_tokens": 89,
+      "estimated_output_tokens": 51,
+      "estimated_total_tokens": 140,
+      "estimated_cost_usd": 1.4e-05,
+      "faithfulness_proxy": 1.0,
+      "answer_preview": "Evaluation answer for tool_calculator_addition.\n\nThe calculator tool should be selected and the answer should include 500.\n\nRequired coverage: 500, calculator.\n\nTool calls:\n- calculator(125 + 375.) => 500"
+    },
+    {
+      "id": "tool_calculator_precedence",
+      "category": "tool_calling",
+      "passed": true,
+      "keyword_accuracy": 1.0,
+      "retrieval_recall_at_k": null,
+      "citation_present": false,
+      "citation_expected": false,
+      "retrieved_sources": [],
+      "expected_sources": [],
+      "tool_hit_rate": 1.0,
+      "actual_tools": [
+        "calculator"
+      ],
+      "expected_tools": [
+        "calculator"
+      ],
+      "latency_seconds": 2.5e-05,
+      "estimated_input_tokens": 84,
+      "estimated_output_tokens": 46,
+      "estimated_total_tokens": 130,
+      "estimated_cost_usd": 1.3e-05,
+      "faithfulness_proxy": 1.0,
+      "answer_preview": "Evaluation answer for tool_calculator_precedence.\n\nThe calculator should respect arithmetic precedence.\n\nRequired coverage: 18, calculator.\n\nTool calls:\n- calculator(8 + 2 * 5.) => 18"
+    },
+    {
+      "id": "tool_calculator_division",
+      "category": "tool_calling",
+      "passed": true,
+      "keyword_accuracy": 1.0,
+      "retrieval_recall_at_k": null,
+      "citation_present": false,
+      "citation_expected": false,
+      "retrieved_sources": [],
+      "expected_sources": [],
+      "tool_hit_rate": 1.0,
+      "actual_tools": [
+        "calculator"
+      ],
+      "expected_tools": [
+        "calculator"
+      ],
+      "latency_seconds": 1.6e-05,
+      "estimated_input_tokens": 79,
+      "estimated_output_tokens": 42,
+      "estimated_total_tokens": 121,
+      "estimated_cost_usd": 1.21e-05,
+      "faithfulness_proxy": 1.0,
+      "answer_preview": "Evaluation answer for tool_calculator_division.\n\nThe calculator should divide correctly.\n\nRequired coverage: 12, calculator.\n\nTool calls:\n- calculator(144 / 12.) => 12"
+    },
+    {
+      "id": "tool_date_diff_days",
+      "category": "tool_calling",
+      "passed": true,
+      "keyword_accuracy": 1.0,
+      "retrieval_recall_at_k": null,
+      "citation_present": false,
+      "citation_expected": false,
+      "retrieved_sources": [],
+      "expected_sources": [],
+      "tool_hit_rate": 1.0,
+      "actual_tools": [
+        "calculator",
+        "date_diff"
+      ],
+      "expected_tools": [
+        "date_diff"
+      ],
+      "latency_seconds": 4.7e-05,
+      "estimated_input_tokens": 102,
+      "estimated_output_tokens": 86,
+      "estimated_total_tokens": 188,
+      "estimated_cost_usd": 1.88e-05,
+      "faithfulness_proxy": 1.0,
+      "answer_preview": "Evaluation answer for tool_date_diff_days.\n\nThe date tool should compute the day difference.\n\nRequired coverage: 30, date_diff.\n\nTool calls:\n- calculator(2026-01-01) => error: leading zeros in decimal integer literals are not permitted; use an 0o prefix for octal integers (<unknown>, line 1)\n- date_diff(2026-01-01 to 2026-01-31) => 30 days"
+    },
+    {
+      "id": "tool_date_diff_year",
+      "category": "tool_calling",
+      "passed": true,
+      "keyword_accuracy": 1.0,
+      "retrieval_recall_at_k": null,
+      "citation_present": false,
+      "citation_expected": false,
+      "retrieved_sources": [],
+      "expected_sources": [],
+      "tool_hit_rate": 1.0,
+      "actual_tools": [
+        "calculator",
+        "date_diff"
+      ],
+      "expected_tools": [
+        "date_diff"
+      ],
+      "latency_seconds": 2.2e-05,
+      "estimated_input_tokens": 103,
+      "estimated_output_tokens": 86,
+      "estimated_total_tokens": 189,
+      "estimated_cost_usd": 1.89e-05,
+      "faithfulness_proxy": 1.0,
+      "answer_preview": "Evaluation answer for tool_date_diff_year.\n\nThe date tool should compute a 14-day difference.\n\nRequired coverage: 14, date_diff.\n\nTool calls:\n- calculator(2026-03-01) => error: leading zeros in decimal integer literals are not permitted; use an 0o prefix for octal integers (<unknown>, line 1)\n- date_diff(2026-03-01 to 2026-03-15) => 14 days"
+    },
+    {
+      "id": "tool_text_word_count",
+      "category": "tool_calling",
+      "passed": true,
+      "keyword_accuracy": 1.0,
+      "retrieval_recall_at_k": null,
+      "citation_present": false,
+      "citation_expected": false,
+      "retrieved_sources": [],
+      "expected_sources": [],
+      "tool_hit_rate": 1.0,
+      "actual_tools": [
+        "text_stats"
+      ],
+      "expected_tools": [
+        "text_stats"
+      ],
+      "latency_seconds": 1.5e-05,
+      "estimated_input_tokens": 100,
+      "estimated_output_tokens": 70,
+      "estimated_total_tokens": 170,
+      "estimated_cost_usd": 1.7e-05,
+      "faithfulness_proxy": 1.0,
+      "answer_preview": "Evaluation answer for tool_text_word_count.\n\nThe text utility should report word count.\n\nRequired coverage: 5, text_stats.\n\nTool calls:\n- text_stats(Word count for this text: AI agents improve workflow quality.) => words=10, characters_without_spaces=52, characters_with_spaces=61"
+    },
+    {
+      "id": "tool_text_character_count",
+      "category": "tool_calling",
+      "passed": true,
+      "keyword_accuracy": 1.0,
+      "retrieval_recall_at_k": null,
+      "citation_present": false,
+      "citation_expected": false,
+      "retrieved_sources": [],
+      "expected_sources": [],
+      "tool_hit_rate": 1.0,
+      "actual_tools": [
+        "text_stats"
+      ],
+      "expected_tools": [
+        "text_stats"
+      ],
+      "latency_seconds": 1.2e-05,
+      "estimated_input_tokens": 89,
+      "estimated_output_tokens": 66,
+      "estimated_total_tokens": 155,
+      "estimated_cost_usd": 1.55e-05,
+      "faithfulness_proxy": 1.0,
+      "answer_preview": "Evaluation answer for tool_text_character_count.\n\nThe text utility should report character count.\n\nRequired coverage: 5, text_stats.\n\nTool calls:\n- text_stats(Character count for the text: agent) => words=6, characters_without_spaces=30, characters_with_spaces=35"
+    },
+    {
+      "id": "tool_multiple_tools",
+      "category": "tool_calling",
+      "passed": true,
+      "keyword_accuracy": 1.0,
+      "retrieval_recall_at_k": null,
+      "citation_present": false,
+      "citation_expected": false,
+      "retrieved_sources": [],
+      "expected_sources": [],
+      "tool_hit_rate": 1.0,
+      "actual_tools": [
+        "calculator",
+        "text_stats"
+      ],
+      "expected_tools": [
+        "calculator",
+        "text_stats"
+      ],
+      "latency_seconds": 2.7e-05,
+      "estimated_input_tokens": 118,
+      "estimated_output_tokens": 88,
+      "estimated_total_tokens": 206,
+      "estimated_cost_usd": 2.06e-05,
+      "faithfulness_proxy": 1.0,
+      "answer_preview": "Evaluation answer for tool_multiple_tools.\n\nThe router should invoke multiple relevant local tools.\n\nRequired coverage: 15, 3, calculator, text_stats.\n\nTool calls:\n- calculator(10 + 5) => 15\n- text_stats(Calculate 10 + 5 and run word count for this text: reliable agent workflow.) => words=13, characters_without_spaces=62, characters_with_spaces=75"
+    },
+    {
+      "id": "mixed_workflow_and_calculator",
+      "category": "mixed_rag_tool",
+      "passed": true,
+      "keyword_accuracy": 1.0,
+      "retrieval_recall_at_k": 1.0,
+      "citation_present": true,
+      "citation_expected": true,
+      "retrieved_sources": [
+        "iyuno_ai_agent_notes.md"
+      ],
+      "expected_sources": [
+        "iyuno_ai_agent_notes.md"
+      ],
+      "tool_hit_rate": 1.0,
+      "actual_tools": [
+        "calculator"
+      ],
+      "expected_tools": [
+        "calculator"
+      ],
+      "latency_seconds": 0.00059,
+      "estimated_input_tokens": 140,
+      "estimated_output_tokens": 201,
+      "estimated_total_tokens": 341,
+      "estimated_cost_usd": 3.41e-05,
+      "faithfulness_proxy": 1.0,
+      "answer_preview": "Evaluation answer for mixed_workflow_and_calculator.\n\nThe answer should combine retrieved workflow facts and calculator output.\n\nRequired coverage: User Request Analysis, Draft Generation, 42, calculator.\n\nRetrieved context summary: # AI Agent Workflow Notes This public knowledge note describes the portfolio agent design. The IYUNO AI Agent uses a multi-step workflow: 1. User Request Analysis: identify the user's goal, constraints, and expected output. 2. Draft Generation: create an initial answer using the analyzed request. 3. Quality Review: review the draft for clarity, completeness, and ac"
+    },
+    {
+      "id": "mixed_demo_mode_and_text_stats",
+      "category": "mixed_rag_tool",
+      "passed": true,
+      "keyword_accuracy": 1.0,
+      "retrieval_recall_at_k": 1.0,
+      "citation_present": true,
+      "citation_expected": true,
+      "retrieved_sources": [
+        "iyuno_ai_agent_notes.md"
+      ],
+      "expected_sources": [
+        "iyuno_ai_agent_notes.md"
+      ],
+      "tool_hit_rate": 1.0,
+      "actual_tools": [
+        "text_stats"
+      ],
+      "expected_tools": [
+        "text_stats"
+      ],
+      "latency_seconds": 0.000565,
+      "estimated_input_tokens": 146,
+      "estimated_output_tokens": 234,
+      "estimated_total_tokens": 380,
+      "estimated_cost_usd": 3.8e-05,
+      "faithfulness_proxy": 1.0,
+      "answer_preview": "Evaluation answer for mixed_demo_mode_and_text_stats.\n\nThe answer should cite Demo Mode facts and include text statistics.\n\nRequired coverage: Demo Mode, does not call, 4, text_stats.\n\nRetrieved context summary: # AI Agent Workflow Notes This public knowledge note describes the portfolio agent design. The IYUNO AI Agent uses a multi-step workflow: 1. User Request Analysis: identify the user's goal, constraints, and expected output. 2. Draft Generation: create an initial answer using the analyzed request. 3. Quality Review: review the draft for clarity, completeness, and accuracy. 4. Final Resu"
+    },
+    {
+      "id": "mixed_public_deploy_and_date",
+      "category": "mixed_rag_tool",
+      "passed": true,
+      "keyword_accuracy": 1.0,
+      "retrieval_recall_at_k": 1.0,
+      "citation_present": true,
+      "citation_expected": true,
+      "retrieved_sources": [
+        "iyuno_ai_agent_notes.md"
+      ],
+      "expected_sources": [
+        "iyuno_ai_agent_notes.md"
+      ],
+      "tool_hit_rate": 1.0,
+      "actual_tools": [
+        "calculator",
+        "date_diff"
+      ],
+      "expected_tools": [
+        "date_diff"
+      ],
+      "latency_seconds": 0.000832,
+      "estimated_input_tokens": 155,
+      "estimated_output_tokens": 244,
+      "estimated_total_tokens": 399,
+      "estimated_cost_usd": 3.99e-05,
+      "faithfulness_proxy": 1.0,
+      "answer_preview": "Evaluation answer for mixed_public_deploy_and_date.\n\nThe answer should cite deployment protection and include date difference.\n\nRequired coverage: public deployment, IYUNO_PUBLIC_DEMO_ONLY, 10, date_diff.\n\nRetrieved context summary: # AI Agent Workflow Notes This public knowledge note describes the portfolio agent design. The IYUNO AI Agent uses a multi-step workflow: 1. User Request Analysis: identify the user's goal, constraints, and expected output. 2. Draft Generation: create an initial answer using the analyzed request. 3. Quality Review: review the draft for clarity, completeness, and ac"
+    },
+    {
+      "id": "mixed_rag_pipeline_and_math",
+      "category": "mixed_rag_tool",
+      "passed": true,
+      "keyword_accuracy": 1.0,
+      "retrieval_recall_at_k": 1.0,
+      "citation_present": true,
+      "citation_expected": true,
+      "retrieved_sources": [
+        "iyuno_ai_agent_notes.md"
+      ],
+      "expected_sources": [
+        "iyuno_ai_agent_notes.md"
+      ],
+      "tool_hit_rate": 1.0,
+      "actual_tools": [
+        "calculator"
+      ],
+      "expected_tools": [
+        "calculator"
+      ],
+      "latency_seconds": 0.000582,
+      "estimated_input_tokens": 120,
+      "estimated_output_tokens": 195,
+      "estimated_total_tokens": 315,
+      "estimated_cost_usd": 3.15e-05,
+      "faithfulness_proxy": 1.0,
+      "answer_preview": "Evaluation answer for mixed_rag_pipeline_and_math.\n\nThe answer should cite RAG pipeline details and include calculator output.\n\nRequired coverage: chunks, embedded, 42, calculator.\n\nRetrieved context summary: # AI Agent Workflow Notes This public knowledge note describes the portfolio agent design. The IYUNO AI Agent uses a multi-step workflow: 1. User Request Analysis: identify the user's goal, constraints, and expected output. 2. Draft Generation: create an initial answer using the analyzed request. 3. Quality Review: review the draft for clarity, completeness, and accuracy. 4. Final Result:"
+    },
+    {
+      "id": "mixed_live_mode_and_words",
+      "category": "mixed_rag_tool",
+      "passed": true,
+      "keyword_accuracy": 1.0,
+      "retrieval_recall_at_k": 1.0,
+      "citation_present": true,
+      "citation_expected": true,
+      "retrieved_sources": [
+        "iyuno_ai_agent_notes.md"
+      ],
+      "expected_sources": [
+        "iyuno_ai_agent_notes.md"
+      ],
+      "tool_hit_rate": 1.0,
+      "actual_tools": [
+        "text_stats"
+      ],
+      "expected_tools": [
+        "text_stats"
+      ],
+      "latency_seconds": 0.000583,
+      "estimated_input_tokens": 134,
+      "estimated_output_tokens": 226,
+      "estimated_total_tokens": 360,
+      "estimated_cost_usd": 3.6e-05,
+      "faithfulness_proxy": 1.0,
+      "answer_preview": "Evaluation answer for mixed_live_mode_and_words.\n\nThe answer should cite Live Mode behavior and include word count.\n\nRequired coverage: Live Mode, OpenAI API, 4, text_stats.\n\nRetrieved context summary: # AI Agent Workflow Notes This public knowledge note describes the portfolio agent design. The IYUNO AI Agent uses a multi-step workflow: 1. User Request Analysis: identify the user's goal, constraints, and expected output. 2. Draft Generation: create an initial answer using the analyzed request. 3. Quality Review: review the draft for clarity, completeness, and accuracy. 4. Final Result: return"
+    },
+    {
+      "id": "mixed_sources_and_division",
+      "category": "mixed_rag_tool",
+      "passed": true,
+      "keyword_accuracy": 1.0,
+      "retrieval_recall_at_k": 1.0,
+      "citation_present": true,
+      "citation_expected": true,
+      "retrieved_sources": [
+        "iyuno_ai_agent_notes.md"
+      ],
+      "expected_sources": [
+        "iyuno_ai_agent_notes.md"
+      ],
+      "tool_hit_rate": 1.0,
+      "actual_tools": [
+        "calculator"
+      ],
+      "expected_tools": [
+        "calculator"
+      ],
+      "latency_seconds": 0.000571,
+      "estimated_input_tokens": 123,
+      "estimated_output_tokens": 192,
+      "estimated_total_tokens": 315,
+      "estimated_cost_usd": 3.15e-05,
+      "faithfulness_proxy": 1.0,
+      "answer_preview": "Evaluation answer for mixed_sources_and_division.\n\nThe answer should cite supported source types and include division result.\n\nRequired coverage: .txt, .md, 9, calculator.\n\nRetrieved context summary: force this with the `IYUNO_PUBLIC_DEMO_ONLY=true` environment variable. RAG support uses public `.txt` or `.md` files in the `data/` directory as local knowledge sources. The documents are split into chunks, embedded, retrieved with vector similarity search, and cited in the final answer. # AI Agent Workflow Notes This public knowledge note describes the portfolio agent design. The IYUNO AI Agent "
+    },
+    {
+      "id": "mixed_ui_and_date_diff",
+      "category": "mixed_rag_tool",
+      "passed": true,
+      "keyword_accuracy": 1.0,
+      "retrieval_recall_at_k": 1.0,
+      "citation_present": true,
+      "citation_expected": true,
+      "retrieved_sources": [
+        "iyuno_ai_agent_notes.md"
+      ],
+      "expected_sources": [
+        "iyuno_ai_agent_notes.md"
+      ],
+      "tool_hit_rate": 1.0,
+      "actual_tools": [
+        "calculator",
+        "date_diff"
+      ],
+      "expected_tools": [
+        "date_diff"
+      ],
+      "latency_seconds": 0.000568,
+      "estimated_input_tokens": 144,
+      "estimated_output_tokens": 238,
+      "estimated_total_tokens": 382,
+      "estimated_cost_usd": 3.82e-05,
+      "faithfulness_proxy": 1.0,
+      "answer_preview": "Evaluation answer for mixed_ui_and_date_diff.\n\nThe answer should cite the Streamlit UI note and include date difference.\n\nRequired coverage: Streamlit, web interface, 24, date_diff.\n\nRetrieved context summary: # AI Agent Workflow Notes This public knowledge note describes the portfolio agent design. The IYUNO AI Agent uses a multi-step workflow: 1. User Request Analysis: identify the user's goal, constraints, and expected output. 2. Draft Generation: create an initial answer using the analyzed request. 3. Quality Review: review the draft for clarity, completeness, and accuracy. 4. Final Result"
+    },
+    {
+      "id": "mixed_citation_and_calculator",
+      "category": "mixed_rag_tool",
+      "passed": true,
+      "keyword_accuracy": 1.0,
+      "retrieval_recall_at_k": 1.0,
+      "citation_present": true,
+      "citation_expected": true,
+      "retrieved_sources": [
+        "iyuno_ai_agent_notes.md"
+      ],
+      "expected_sources": [
+        "iyuno_ai_agent_notes.md"
+      ],
+      "tool_hit_rate": 1.0,
+      "actual_tools": [
+        "calculator"
+      ],
+      "expected_tools": [
+        "calculator"
+      ],
+      "latency_seconds": 0.000571,
+      "estimated_input_tokens": 125,
+      "estimated_output_tokens": 196,
+      "estimated_total_tokens": 321,
+      "estimated_cost_usd": 3.21e-05,
+      "faithfulness_proxy": 1.0,
+      "answer_preview": "Evaluation answer for mixed_citation_and_calculator.\n\nThe answer should cite evidence behavior and include subtraction result.\n\nRequired coverage: cited, final answer, 18, calculator.\n\nRetrieved context summary: force this with the `IYUNO_PUBLIC_DEMO_ONLY=true` environment variable. RAG support uses public `.txt` or `.md` files in the `data/` directory as local knowledge sources. The documents are split into chunks, embedded, retrieved with vector similarity search, and cited in the final answer. # AI Agent Workflow Notes This public knowledge note describes the portfolio agent design. The IYU"
+    }
+  ]
+}

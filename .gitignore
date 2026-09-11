@@ -3,6 +3,5 @@
 __pycache__/
 *.pyc
 evaluation/results.json
-evaluation/metrics.json
 data/*.db
 data/*.db-*
