@@ -330,14 +330,11 @@ def apply_theme():
             margin-bottom: 0.65rem;
         }
 
-        div[data-testid="stRadio"] label,
-        div[data-testid="stRadio"] p {
-            color: var(--iyuno-gray-300);
-        }
-
         div[data-testid="stRadio"] input {
-            accent-color: var(--iyuno-gray-300);
-        }
+    accent-color: white !important;
+}
+
+        
 
         div[data-testid="stForm"] {
             border: 0;
@@ -674,7 +671,7 @@ def render_feedback_form(result, use_rag=False, use_tools=False):
     with st.form("agent_feedback_form", clear_on_submit=True):
         rating_label = st.radio(
             "이 답변이 도움이 되었나요?",
-            ["👍 도움이 됨", "👎 도움이 안 됨"],
+            ["도움됨", "도움되지 않음"],
             horizontal=True,
         )
         comment = st.text_area(
@@ -687,7 +684,7 @@ def render_feedback_form(result, use_rag=False, use_tools=False):
     if not submitted:
         return
 
-    rating = "helpful" if rating_label.startswith("👍") else "not_helpful"
+    rating = "helpful" if rating_label == "도움됨" else "not_helpful"
     signature = create_feedback_signature(result, use_rag, use_tools, rating, comment)
 
     if st.session_state.get("last_feedback_signature") == signature:
