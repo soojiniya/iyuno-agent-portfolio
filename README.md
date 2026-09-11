@@ -1,5 +1,7 @@
 # IYUNO AI Agent
 
+[![CI](https://github.com/soojiniya/iyuno-agent-portfolio/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/soojiniya/iyuno-agent-portfolio/actions/workflows/ci.yml)
+
 AI Agent Engineer 포트폴리오를 위해 만든 multi-step AI Agent workflow 프로젝트입니다.
 
 단순히 OpenAI API를 한 번 호출하는 챗봇이 아니라, 하나의 사용자 요청을 분석하고 초안을 생성한 뒤 품질 검토를 거쳐 최종 결과를 개선하는 Agent workflow를 구현했습니다.
@@ -34,6 +36,18 @@ User Request → Analyze → Draft → Review → Final Result
 - Local Tool Calling: calculator, date difference, text statistics
 - API 호출 없이 실행 가능한 단위 테스트
 - `evaluation/` 기반의 간단한 Agent 결과 평가 구조
+
+## Job Requirements Mapping
+
+| Job requirement | Project evidence | Notes |
+| --- | --- | --- |
+| LLM 기반 AI Agent 설계 및 구현 | Multi-step Agent Workflow: `Analyze → Draft → Review → Final Result` | 하나의 사용자 요청을 여러 단계로 처리하는 agent workflow를 구현했습니다. |
+| RAG 기반 정보 검색 | Document loading, chunking, embedding 구조, vector search, citation 표시 | `data/`의 `.txt`/`.md` 문서를 knowledge source로 사용합니다. |
+| Tool Calling / API orchestration | Local tools: `calculator`, `date_diff`, `text_stats` | 외부 서비스 API 여러 개를 orchestration한 구조는 아니며, local Python tool 호출 중심입니다. |
+| State / Context 관리 | `AgentState`로 `analysis`, `retrieved_context`, `tool_results`, `draft`, `review`, `final_answer` 관리 | 한 번의 Agent 실행 내 context 전달 과정을 명시적으로 관리합니다. |
+| Evaluation / Feedback Loop | Deterministic evaluation, Streamlit feedback UI, SQLite 저장 | 평가와 사용자 피드백 저장 흐름을 분리해 구현했습니다. |
+| API / DB 통합 | OpenAI API 연동, SQLite feedback storage | 공개 배포에서는 API credit 보호를 위해 Demo Mode를 강제할 수 있습니다. |
+| 테스트 및 안정성 | `unittest`, GitHub Actions CI | CI에서 compile check, unit test, deterministic evaluation을 실행합니다. |
 
 ## Tech Stack
 
@@ -167,6 +181,32 @@ Main metrics:
 
 The evaluation set includes 30+ cases across general Agent requests, RAG questions,
 Tool Calling questions, and mixed RAG + Tool workflows.
+
+### Evaluation Results
+
+The latest deterministic local evaluation result is saved in [`evaluation/metrics.json`](evaluation/metrics.json).
+Latency and estimated cost below are not Live OpenAI API benchmark numbers; they are calculated by the local deterministic evaluator.
+
+| Metric | Result |
+| --- | ---: |
+| Total cases | 32 |
+| Task success rate | 100.00% |
+| Keyword accuracy | 100.00% |
+| Recall@k | 100.00% |
+| Citation rate | 100.00% |
+| Average latency | ~0.0003s |
+| Estimated total tokens | 7,578 |
+| Estimated cost | $0.00075780 |
+| Faithfulness proxy | 75.00% |
+
+| Category | Cases | Success rate |
+| --- | ---: | ---: |
+| `general_agent` | 8 | 100.00% |
+| `rag` | 8 | 100.00% |
+| `tool_calling` | 8 | 100.00% |
+| `mixed_rag_tool` | 8 | 100.00% |
+
+The faithfulness proxy is a deterministic approximation rather than an external LLM judge score, and it is a target for future improvement.
 
 현재 평가는 `sample_cases.json`의 필수 키워드 포함 여부를 기준으로 점수를 계산합니다. 향후에는 다음과 같이 확장할 수 있습니다.
 
