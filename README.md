@@ -135,6 +135,19 @@ IYUNO_PUBLIC_DEMO_ONLY=true
 3. Demo Mode에서는 mock RAG 결과를 사용하고, Live Mode에서만 OpenAI embedding/API를 사용합니다.
 4. 최종 답변 하단에 사용된 문서 source가 `filename#chunk-n` 형식으로 표시됩니다.
 
+## Data Source & License
+
+| Item | Description |
+| --- | --- |
+| File | `data/iyuno_ai_agent_notes.md` |
+| Purpose | RAG 검색 및 Citation 기능 검증을 위한 프로젝트 샘플 문서 |
+| Source | 본 프로젝트를 위해 직접 작성한 포트폴리오용 문서 |
+| Created | 2026-09 |
+| License | Educational / Portfolio Use |
+
+이 프로젝트는 실제 IYUNO 내부 데이터나 비공개 문서를 사용하지 않았습니다.
+RAG 기능 검증을 위해 직접 작성한 샘플 데이터만 사용했습니다.
+
 ## Tool Calling Usage
 
 로컬 Python 함수 기반 tool을 사용할 수 있습니다.
