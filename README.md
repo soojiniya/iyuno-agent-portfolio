@@ -200,6 +200,8 @@ Tool Calling questions, and mixed RAG + Tool workflows.
 The latest deterministic local evaluation result is saved in [`evaluation/metrics.json`](evaluation/metrics.json).
 Latency and estimated cost below are not Live OpenAI API benchmark numbers; they are calculated by the local deterministic evaluator.
 
+![Evaluation Results](evaluation/evaluation_results.png)
+
 | Metric | Result |
 | --- | ---: |
 | Total cases | 32 |
